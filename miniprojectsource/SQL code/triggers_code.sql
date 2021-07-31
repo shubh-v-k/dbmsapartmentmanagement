@@ -1,0 +1,3 @@
+CREATE DEFINER=`root`@`localhost` TRIGGER `tenantNum` AFTER INSERT ON `apartment` FOR EACH ROW UPDATE building SET building.Tenants = building.Tenants + 1 WHERE NEW.BuildingID = building.BuildingID;
+CREATE DEFINER=`root`@`localhost` TRIGGER `tenantNumdecrease` AFTER DELETE ON `apartment` FOR EACH ROW UPDATE building SET building.Tenants = building.Tenants - 1 WHERE OLD.BuildingID = building.BuildingID;
+CREATE DEFINER=`root`@`localhost` TRIGGER `oweing` AFTER INSERT ON `payment` FOR EACH ROW UPDATE apartment SET apartment.Owe = apartment.Owe - NEW.PaidRent WHERE NEW.FlatNum = apartment.FlatNum AND NEW.ApartmentID = apartment.ApartmentID;
